@@ -1,50 +1,52 @@
 import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
+import Loader from './Loader';
 
 export default class FlatListBasics extends Component {
 
-    static navigationOptions = { title: 'dashboard',
-    headerTitleStyle: {
-        color: '#fff',
-        },
-        headerStyle: {
-        backgroundColor: '#000',
-        },
-        headerTintColor: {
-        /*  */
-        },
+    static navigationOptions = { 
+        title: 'informations',
+        headerTitleStyle: { color: '#fff' },
+        headerStyle: { backgroundColor: '#000' },
     };
-
 
     constructor(props) {
         super(props);
-        this.state = {data: []}
-    }
-    
-    componentWillMount() {
+        this.state = {
+            data: [], 
+            isLoading: true, 
+            isError: false
+        }
         this.getData();
     }
 
-
     async getData() {
         try {
-            const data = await fetch("https://swapi.co/api/people").then(res=>res.json());
+            const data = await fetch("https://sswapi.co/api/people").then(res => res.json());
 
             const list = await data.results.map((object) => {
-                const item = {
+                return {
                     key: `${object.name}, ${object.birth_year}, ${object.gender}`
                 }
-                return item;
             })
-            await this.setState({data: list});
+            await this.setState({data: list, isLoading: false});
+
             await console.log(this.state.data)
 
         } catch (err) {
             console.log(err)
+            this.setState({isError: true, isLoading: false});
         } 
     }
 
   render() {
+    if (this.state.isLoading) return (<Loader />);
+    if (this.state.isError) { return (
+        <View style={styles.container}>
+            <Text style={styles.item}>A failed occurred, try refreshing</Text>
+        </View>
+    )}
+
     return (
       <View style={styles.container}>
         <FlatList data={this.state.data}
