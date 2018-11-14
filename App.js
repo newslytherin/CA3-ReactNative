@@ -11,14 +11,24 @@ const Touchable = (props) => (
   </TouchableOpacity>)
 
 class HomeScreen extends React.Component {
-  static navigationOptions = { title: 'CA3 React Native' };
+  static navigationOptions = { title: 'dashboard',
+    headerTitleStyle: {
+      color: '#fff',
+    },
+    headerStyle: {
+      backgroundColor: '#000',
+    },
+    headerTintColor: {
+      /*  */
+    },
+  };
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View >
-        <Text style={{ textAlign: "center", fontSize: 20 }}>Hello from newSlytherin</Text>
-        <Text style={{ textAlign: "center", fontSize: 20 }}>Hello from newSlytherin</Text>
-        <Touchable onPress={() => navigate('listView')} title="Lars" />
+      <View style={styles.background}>
+        <Text style={styles.wellcome}>Hello from newSlytherin</Text>
+        <Text style={styles.paragraph}>Hello from newSlytherin</Text>
+        <Touchable onPress={() => navigate('listView')} title="Show Star Wars" />
       </View>
     )
   }
@@ -32,7 +42,18 @@ const RouteStack = createStackNavigator({
 });
 
 const styles = StyleSheet.create({
+  wellcome: {
+    color: 'white',
+    textAlign: "center", 
+    fontSize: 34,
+    margin: 20
+  },
+  paragraph: {
+    color: 'white',
+    fontSize: 16
+  },
   button: {
+    color: 'white',
     margin: 3,
     alignItems: 'center',
     backgroundColor: '#2196F3'
@@ -42,5 +63,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     color: 'white'
+  },
+  background: {
+    flex: 1,
+    backgroundColor: '#000',
   }
 })
