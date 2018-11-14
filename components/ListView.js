@@ -4,6 +4,7 @@ import { Styles } from '../resources/Styles';
 import Touchable from './Touchable';
 import Loader from './Loader';
 
+const URL = 'http://localhost:8090/bob/api/swapi/async';
 
 export default class FlatListBasics extends Component {
 
@@ -25,8 +26,8 @@ export default class FlatListBasics extends Component {
 
     async getData() {
         try {
-            const data = await fetch("https://swapi.co/api/people").then(res => res.json());
-            const list = await data.results.map((object, index) => {
+            const data = await fetch(URL).then(res => res.json());
+            const list = await data.map((object, index) => {
                 return {
                     key: `${index}`,
                     val: `${object.name}, ${object.birth_year} ${object.gender}`
@@ -47,14 +48,13 @@ export default class FlatListBasics extends Component {
 
   render() {
     if (this.state.isLoading) return (<Loader />)
-    if (this.state.isError) return (
+    else if (this.state.isError) return (
         <View style={Styles.container}>
             <Text style={Styles.error}>A failed occurred, try refreshing or come back later</Text>
             <Touchable onPress={() => this.refresh()} title="refresh" />
         </View>
     )
-
-    return (
+    else return (
       <View style={Styles.container}>
         <FlatList 
             data={this.state.data}

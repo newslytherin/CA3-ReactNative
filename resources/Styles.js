@@ -5,14 +5,20 @@ export const Styles = StyleSheet.create({
         color: 'white',
         textAlign: "center", 
         fontSize: 34,
-        margin: 20,
+        margin: 30,
     },
     smallText: {
         color: 'white',
-        fontSize: 16
+        fontSize: 16,
+        textAlign: "center"
+    },
+    dashboardContainer: {
+        flex: 1,
+        backgroundColor: '#000'
     },
     container: {
         flex: 1,
+        justifyContent: 'center',
         backgroundColor: '#000'
     },
     button: {

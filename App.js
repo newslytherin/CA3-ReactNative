@@ -14,7 +14,7 @@ class Dashboard extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View style={Styles.container}>
+      <View style={Styles.dashboardContainer}>
         <Text style={Styles.largeText}>Hello from newSlytherin</Text>
         <Text style={Styles.smallText}>{StarWarsText}</Text>
         <Touchable onPress={() => navigate('listView')} title="Show Star Wars" />
