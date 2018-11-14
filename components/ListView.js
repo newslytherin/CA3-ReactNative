@@ -49,7 +49,7 @@ export default class FlatListBasics extends Component {
     refresh() {
         this.setState({
             data: [],
-            isLoading: false, 
+            isLoading: true, 
             isError: false
         })
         this.getData()
