@@ -1,23 +1,10 @@
 import React from 'react'
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, Text, View } from 'react-native'
+import { Styles } from '../resources/Styles';
 
 export default () => (
-    <View style={styles.container}>
-        <Text style={styles.text}>loading...</Text>
+    <View style={Styles.container}>
+        <Text style={Styles.largeText}>loading...</Text>
         <ActivityIndicator size="large" color="#2196F3" />
     </View>
 )
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000',
-    justifyContent: 'center'
-  },
-  text: {
-    color: 'white',
-    textAlign: "center", 
-    fontSize: 34,
-    margin: 20
-  }
-})
