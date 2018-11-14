@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Loader from './Loader';
+
+const Touchable = (props) => (
+    <TouchableOpacity style={styles.button} onPress={props.onPress}>
+      <Text style={styles.buttonText}>{props.title}</Text>
+    </TouchableOpacity>)
 
 export default class FlatListBasics extends Component {
 
@@ -20,9 +25,11 @@ export default class FlatListBasics extends Component {
         this.getData();
     }
 
+    
+
     async getData() {
         try {
-            const data = await fetch("https://sswapi.co/api/people").then(res => res.json());
+            const data = await fetch("https://swapi.co/api/people").then(res => res.json());
 
             const list = await data.results.map((object) => {
                 return {
@@ -31,12 +38,21 @@ export default class FlatListBasics extends Component {
             })
             await this.setState({data: list, isLoading: false});
 
-            await console.log(this.state.data)
+            //await console.log('data::' + this.state.data)
 
         } catch (err) {
-            console.log(err)
+            console.log('err:: ' + err)
             this.setState({isError: true, isLoading: false});
         } 
+    }
+
+    refresh() {
+        this.setState({
+            data: [],
+            isLoading: false, 
+            isError: false
+        })
+        this.getData()
     }
 
   render() {
@@ -44,6 +60,7 @@ export default class FlatListBasics extends Component {
     if (this.state.isError) { return (
         <View style={styles.container}>
             <Text style={styles.item}>A failed occurred, try refreshing</Text>
+            <Touchable onPress={() => this.refresh()} title="refresh" />
         </View>
     )}
 
@@ -52,6 +69,7 @@ export default class FlatListBasics extends Component {
         <FlatList data={this.state.data}
           renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
         />
+        <Touchable onPress={() => this.refresh()} title="refresh" />
       </View>
     );
   }
@@ -68,5 +86,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
     height: 44,
     color: '#fff',
+  },
+  button: {
+    color: 'white',
+    margin: 3,
+    alignItems: 'center',
+    backgroundColor: '#2196F3'
+  },
+  buttonText: {
+    padding: 7,
+    fontSize: 18,
+    fontWeight: "bold",
+    color: 'white'
   },
 })
