@@ -1,5 +1,10 @@
 import { StyleSheet } from 'react-native';
 
+export const Colors  = {
+    red: '#ff0000',
+    yellow: '#ffff00'
+}
+
 export const Styles = StyleSheet.create({
     largeText: {
         color: 'white',
@@ -26,10 +31,10 @@ export const Styles = StyleSheet.create({
         margin: 20,
         alignItems: 'center',
         backgroundColor: '#000',
-        borderColor: 'rgb(255, 0, 0)',
+        borderColor: Colors.red,
         borderWidth: 3,
 
-        shadowColor: 'rgb(255, 0, 0)',
+        shadowColor: Colors.red,
         shadowOffset: { width: 0, height: 0 },
         shadowOpacity: 1,
         shadowRadius: 25,
@@ -44,12 +49,24 @@ export const Styles = StyleSheet.create({
         padding: 10,
         fontSize: 18,
         height: 44,
-        color: 'rgb(249, 232, 62)',
+        color: Colors.yellow,
     },
     error: {
         textAlign: "center", 
         margin: 30,
         fontSize: 24,
-        color: 'rgb(255, 0, 0)',
+        color: Colors.red,
     },
+    itemContainer: {
+        padding: 10,
+    },
+    itemHeader: {
+        fontWeight: "bold",
+        color: Colors.yellow,
+        fontSize: 24,
+    },
+    itemBody: {
+        color: Colors.yellow,
+        fontSize: 16,
+    }
 })

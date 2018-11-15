@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { FlatList, Text, View } from 'react-native';
-import { Styles } from '../resources/Styles';
-import Touchable from './Touchable';
 import Loader from './Loader';
+import Error from './Error';
+import List from './List';
 
 const URL = 'http://localhost:8090/bob/api/swapi/async';
 
@@ -12,6 +11,7 @@ export default class FlatListBasics extends Component {
         title: 'informations',
         headerTitleStyle: { color: '#fff' },
         headerStyle: { backgroundColor: '#000' },
+        headerTintColor: '#fff',
     };
 
     constructor(props) {
@@ -30,7 +30,9 @@ export default class FlatListBasics extends Component {
             const list = await data.map((object, index) => {
                 return {
                     key: `${index}`,
-                    val: `${object.name}, ${object.birth_year} ${object.gender}`
+                    name: object.name,
+                    birth: object.birth_year,
+                    gender: object.gender,
                 }
             })
             await this.setState({data: list, isLoading: false});
@@ -41,27 +43,14 @@ export default class FlatListBasics extends Component {
         } 
     }
 
-    refresh() {
+    refresh = () => {
         this.setState({ isLoading: true, isError: false })
         this.getData()
     }
 
-  render() {
-    if (this.state.isLoading) return (<Loader />)
-    else if (this.state.isError) return (
-        <View style={Styles.container}>
-            <Text style={Styles.error}>A failed occurred, try refreshing or come back later</Text>
-            <Touchable onPress={() => this.refresh()} title="refresh" />
-        </View>
-    )
-    else return (
-      <View style={Styles.container}>
-        <FlatList 
-            data={this.state.data}
-            renderItem={({item}) => <Text style={Styles.listItem}>{item.val}</Text>}
-        />
-        <Touchable onPress={() => this.refresh()} title="refresh" />
-      </View>
-    );
-  }
-}
+    render() {
+        if (this.state.isLoading) return (<Loader />)
+        else if (this.state.isError) return (<Error refresh={this.refresh} />)
+        else return (<List data={this.state.data} refresh={this.refresh}/>)
+    }
+} 

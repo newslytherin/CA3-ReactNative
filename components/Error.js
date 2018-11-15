@@ -6,6 +6,6 @@ import Touchable from './Touchable';
 export default (props) => (
     <View style={Styles.container}>
         <Text style={Styles.error}>A failed occurred, try refreshing or come back later</Text>
-        <Touchable onPress={() => props.refresh} title="refresh" />
+        <Touchable onPress={() => props.refresh()} title="refresh" />
     </View>
 )
