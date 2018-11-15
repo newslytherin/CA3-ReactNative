@@ -6,6 +6,13 @@ export const Colors  = {
 }
 
 export const Styles = StyleSheet.create({
+    title: {
+        color: Colors.yellow,
+        textAlign: "center", 
+        fontSize: 34,
+        fontWeight: 'bold',
+        margin: 20,
+    },
     largeText: {
         color: 'white',
         textAlign: "center", 
@@ -38,18 +45,13 @@ export const Styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 0 },
         shadowOpacity: 1,
         shadowRadius: 25,
+        elevation: 1,
     },
     buttonText: {
         padding: 7,
         fontSize: 18,
         fontWeight: "bold",
         color: 'white'
-    },
-    listItem: {
-        padding: 10,
-        fontSize: 18,
-        height: 44,
-        color: Colors.yellow,
     },
     error: {
         textAlign: "center", 

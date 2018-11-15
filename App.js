@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Platform } from 'react-native';
+import { Text, View, Platform, ScrollView } from 'react-native';
 import { Constants } from "expo";
 import { createStackNavigator  } from 'react-navigation';
 import { StarWarsText  } from './resources/StarWarsText';
@@ -17,11 +17,11 @@ class Dashboard extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View style={Styles.dashboardContainer}>
-        <Text style={Styles.largeText}>Hello from newSlytherin</Text>
+      <ScrollView style={Styles.dashboardContainer}>
+        <Text style={Styles.title}>Hello from newSlytherin</Text>
         <Text style={Styles.smallText}>{StarWarsText}</Text>
         <Touchable onPress={() => navigate('listView')} title="Show Star Wars" />
-      </View>
+      </ScrollView>
     )
   }
 }
