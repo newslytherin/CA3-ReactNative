@@ -3,7 +3,7 @@ import Loader from './Loader';
 import Error from './Error';
 import List from './List';
 
-const URL = 'http://localhost:8090/bob/api/swapi/async';
+const URL = 'https://stephandjurhuus.com/CA3-Backend/api/swapi/async';
 
 export default class FlatListBasics extends Component {
 
